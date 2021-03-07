@@ -1,0 +1,51 @@
+{
+    "name": "CDKBoilerplate",
+    "version": "0.1.0",
+    "bin": {
+        "project": "build/project.js"
+    },
+    "scripts": {
+        "dev": "tsnd --respawn --clear --notify server/index.ts",
+        "build": "tsc",
+        "watch": "tsc -w",
+        "test": "jest",
+        "cdk": "cdk",
+        "lint": "eslint --fix --ext .ts ."
+    },
+    "devDependencies": {
+        "@aws-cdk/assert": "1.92.0",
+        "@types/aws-lambda": "^8.10.72",
+        "@types/express": "^4.17.11",
+        "@types/jest": "^26.0.10",
+        "@types/node": "^14.14.31",
+        "@types/node-notifier": "^8.0.0",
+        "@typescript-eslint/eslint-plugin": "^4.16.1",
+        "@typescript-eslint/parser": "^4.16.1",
+        "aws-cdk": "1.92.0",
+        "eslint": "^7.21.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-import-resolver-typescript": "^2.4.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-prettier": "^3.3.1",
+        "jest": "^26.4.2",
+        "prettier": "^2.2.1",
+        "ts-jest": "^26.2.0",
+        "ts-node": "^9.0.0",
+        "ts-node-dev": "^1.1.6",
+        "typescript": "~3.9.7"
+    },
+    "dependencies": {
+        "@aws-cdk/aws-lambda": "^1.92.0",
+        "@aws-cdk/aws-lambda-nodejs": "1.92.0",
+        "@aws-cdk/core": "1.92.0",
+        "aws-sdk": "^2.857.0",
+        "body-parser": "^1.19.0",
+        "chalk": "^4.1.0",
+        "express": "^4.17.1",
+        "loglevel": "^1.7.1",
+        "node-notifier": "^9.0.0",
+        "qs": "^6.9.6",
+        "source-map-support": "^0.5.16"
+    }
+}
