@@ -1,21 +1,23 @@
-import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
-import { Construct } from '@aws-cdk/core';
+import path from 'path';
 
-export class Example extends Construct {
+import { Construct, Duration } from '@aws-cdk/core';
+import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
+import { Runtime } from '@aws-cdk/aws-lambda';
+import { config } from 'dotenv';
+
+config();
+
+export class LambdaExample extends Construct {
     public readonly func: NodejsFunction;
 
     constructor(scope: Construct, id: string) {
         super(scope, id);
 
-        this.func = new NodejsFunction(this, 'function', {
-            functionName: 'Example Function',
-            entry: './lambdas/example/index.ts',
-            bundling: {
-                target: 'es2020',
-                keepNames: true,
-                externalModules: ['aws-sdk'],
-                nodeModules: ['loglevel'],
-            },
+        this.func = new NodejsFunction(scope, 'LambdaExample', {
+            runtime: Runtime.NODEJS_14_X,
+            entry: path.resolve(__dirname, '..', '..', 'lambdas', 'example', 'index.ts'),
+            handler: 'handler',
+            timeout: Duration.seconds(30),
         });
     }
 }
