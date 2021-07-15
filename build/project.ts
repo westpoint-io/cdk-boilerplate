@@ -4,4 +4,5 @@ import * as cdk from '@aws-cdk/core';
 import Project from '../src/project-stack';
 
 const app = new cdk.App();
+
 new Project(app, 'Project');

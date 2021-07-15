@@ -5,6 +5,8 @@ import { join } from 'path';
 import { existsSync } from 'fs';
 import chalk from 'chalk';
 import notifier from 'node-notifier';
+import cors from 'cors';
+
 import api from './api';
 
 const configurationFilePath = join(process.cwd(), 'server/config.json');
@@ -22,6 +24,7 @@ AWS.config.loadFromPath(configurationFilePath);
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 function expressToLambda(req: Request<any, any, any, QueryString.ParsedQs, Record<string, any>>) {
     return {
@@ -43,7 +46,7 @@ app.all('*', async (req, res) => {
     }
 
     try {
-        const { handler } = await import(`../lambdas/${route.directory}/index`);
+        const { handler } = await import(`../lambda/${route.directory}/index`);
         const result = await handler(expressToLambda(req));
         return res.status(result.statusCode).json(JSON.parse(result.body));
     } catch (error) {
@@ -51,10 +54,13 @@ app.all('*', async (req, res) => {
     }
 });
 
-app.listen(3333, () => {
+const port = 3333;
+
+app.listen(port, () => {
     notifier.notify({
         type: 'info',
-        message: `server started at http://localhost:${3333}`,
+        message: `server started at http://localhost:${port}`,
     });
-    console.log(chalk.cyan(`server started at http://localhost:${3333}`));
+
+    console.log(chalk.cyan(`server started at http://localhost:${port}`));
 });
